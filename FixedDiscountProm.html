@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Admin Level Users</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/extra-libs/multicheck/multicheck.css">
+    <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">   
+    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/styles.css">
+    <link rel="stylesheet" href="dist/css/promotionManagement.css">
+</head>
+
+<style>
+  .inL{
+    height: 44px;
+    border:1.5px solid #D9D9D9;
+    background: #FFFFFF;
+border: 1px solid rgba(0, 0, 0, 0.15);
+box-sizing: border-box;
+border-radius: 4px;  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  }
+  .btnToAdd{
+    background: #F4F6F8 !important;
+    font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 22px;
+/* identical to box height, or 169% */
+
+letter-spacing: 0.3px;
+text-transform: uppercase;
+
+color: #263238;
+border:none !important;
+  }
+  .dropdownContent{
+      display: none;
+      padding-top: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 0 2px rgb(204, 204, 204);
+      position: absolute;
+      top:44px;
+      z-index: 5; 
+      width: 95% !important;
+      background: #F4F6F8 !important;
+      box-shadow: inset 0px -1px 0px #EEEEEE;
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.14), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 3px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dip{
+      display: block !important;
+  }
+  .listData{
+      width: 100%;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      flex-direction: column;
+     /*  */
+     
+      font-size: 0.875rem;
+    color: #3e5569;
+    text-align: left;
+    list-style: none;
+    border-radius: 4px;
+  }
+ 
+  .k{
+      list-style: none;
+      cursor: pointer;padding: 10px 0;
+      width: 100%;
+      padding-left:20px;
+  }
+  .k:hover{
+      background-color: #ffffff;
+  }
+  .newEleAdd{
+      display: flex;
+      margin-left:20px ;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</style>
+
+<body>
+ 
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+   
+    <div id="main-wrapper" class="secondaryBackground" style="min-height:100vh ;">
+        
+        <header class="topbar" style="background-color: #2E3E50;">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon p-l-10 d-flex justify-content-center align-items-center">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <svg width="156" height="36" viewBox="0 0 156 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.62828 15.8979C6.62828 15.8979 5.05782 13.9861 3.17821 14.5835C1.2986 15.1829 3.11562 16.2242 3.11562 16.2242L4.53054 17.6372L5.88478 19.0995C5.88478 19.0995 6.80467 19.9948 6.80467 20.1977C6.80467 20.4007 7.03607 21.4666 6.36654 21.9256C5.69701 22.3846 4.90419 22.5458 3.84964 21.8213C2.79698 21.0967 1.82018 19.7501 1.3536 18.9288C0.888911 18.1076 0.0543707 14.5172 0.0202304 12.8329C-0.01391 11.1467 -0.239614 6.81851 2.25642 4.04177C4.75246 1.26502 6.8445 0.462726 10.2092 0.121323C13.572 -0.22008 17.9553 0.0758027 20.2541 2.09198C22.5528 4.10815 23.3779 5.66723 23.8217 8.73796C24.2655 11.8087 23.9791 14.722 23.8995 15.1336C23.8217 15.5452 23.2091 17.1479 21.98 17.2465C20.7491 17.3451 19.8368 16.9108 19.7078 16.3C19.5788 15.6893 19.5618 15.1336 19.5618 14.282C19.5618 14.0202 19.3114 13.1705 18.2322 13.1705C17.153 13.1705 16.8514 14.4147 16.8514 14.4147C16.8514 14.4147 16.8173 13.1402 16.8173 13.0188C16.8173 12.8993 16.4948 11.9699 15.5104 12.0003C14.5261 12.0325 14.1278 12.9695 14.1278 13.18V11.8846C14.1278 11.8846 14.0253 10.775 12.7413 10.8414C11.4572 10.9059 11.3548 12.0913 11.3548 12.0913V5.57239C11.3548 5.57239 11.2012 4.46662 10.0139 4.46662C8.82654 4.46662 8.616 5.66533 8.616 5.66533V15.5243C8.616 15.5243 8.62738 16.2943 8.09821 16.4613C7.56903 16.6282 7.19918 16.3816 7.16694 16.3816C7.1328 16.3816 6.62828 15.8979 6.62828 15.8979Z" fill="#E64D3D"/>
+                                <path d="M16.6712 19.0993C12.7091 19.0993 10.0063 21.7073 10.0063 25.6675C10.0063 29.5557 12.6161 32.1656 16.7907 32.1656C19.1388 32.1656 21.0602 31.3348 22.3651 29.9123L20.2067 27.8013C19.3531 28.6548 18.2607 29.1062 17.1473 29.1062C15.6281 29.1062 14.5375 28.2527 14.1354 26.7354H23.1256C23.4083 22.0638 21.1778 19.0993 16.6712 19.0993ZM14.0614 24.5295C14.3231 22.9894 15.2942 21.9444 16.7186 21.9444C18.1905 21.9444 19.1862 22.9648 19.1862 24.5295H14.0614ZM25.377 15.4236V32.0233H29.599V27.3518H32.611C36.8576 27.3518 39.3006 25.0985 39.3006 21.2103C39.3006 17.5118 36.8576 15.4236 32.611 15.4236H25.377ZM29.599 18.7446H32.3985C34.2497 18.7446 35.3156 19.6209 35.3156 21.3526C35.3156 23.107 34.2478 24.0326 32.3985 24.0326H29.599V18.7446ZM49.3833 15.2813C44.2585 15.2813 40.4158 18.8622 40.4158 23.6988C40.4158 28.56 44.2585 32.2111 49.3833 32.2111C54.5309 32.2111 58.3736 28.5353 58.3736 23.6988C58.3717 18.8869 54.529 15.2813 49.3833 15.2813ZM49.4289 18.8148C51.9913 18.8148 54.0302 20.9258 54.0302 23.7234C54.0302 26.5211 51.9913 28.6795 49.4289 28.6795C46.8911 28.6795 44.7327 26.5211 44.7327 23.7234C44.7327 20.9258 46.8683 18.8148 49.4289 18.8148ZM66.9827 15.2339C62.9977 15.2339 60.3651 17.178 60.3651 20.2373C60.3651 26.1171 69.143 24.3626 69.143 27.3044C69.143 28.2527 68.3122 28.7516 66.9846 28.7516C65.2529 28.7516 62.6905 27.7558 60.9835 26.2612L59.3466 29.5102C61.3154 31.1224 64.1623 32.1656 66.9371 32.1656C70.6376 32.1656 73.5793 30.4112 73.5793 27.092C73.5793 21.0927 64.8015 22.7296 64.8015 19.8599C64.8015 19.0538 65.5374 18.6498 66.628 18.6498C67.9803 18.6498 70.1862 19.3611 71.9425 20.3815L73.5319 17.085C71.823 15.9698 69.3782 15.2339 66.9827 15.2339Z" fill="white"/>
+                                <path d="M92.6467 31.5484V15.8135H90.8486V22.9166H81.3576V15.8135H79.5596V31.5484H81.3576V24.6255H90.8467V31.5484H92.6467ZM108.105 19.7036H106.305L102.549 29.481L98.6137 19.7036H96.7701L101.673 31.4592L101.178 32.5612C100.706 33.6632 99.9413 34.2246 99.0195 34.2246C98.4354 34.2246 97.8948 34.0444 97.3562 33.6632L96.6145 35.1236C97.3353 35.7078 98.1205 35.9999 99.1106 35.9999C100.685 35.9999 101.921 35.0573 102.663 33.2345L108.105 19.7036ZM118.324 19.6353C116.255 19.6353 114.637 20.6026 113.759 22.266V14.8708H112.004V31.5503H113.759V29.0106C114.635 30.6513 116.255 31.6186 118.37 31.6186C121.721 31.6186 124.014 29.1681 124.014 25.6611C124.014 22.1086 121.675 19.6353 118.324 19.6353ZM118.009 30.0197C115.513 30.0197 113.759 28.1988 113.759 25.6137C113.759 23.0512 115.513 21.2077 118.009 21.2077C120.482 21.2077 122.237 23.074 122.237 25.6137C122.237 28.178 120.482 30.0197 118.009 30.0197ZM129.52 19.7036H127.766V31.5503H129.52V25.2552C129.723 22.9166 131.275 21.367 133.771 21.4125V19.6353C131.77 19.6581 130.307 20.6026 129.52 22.3324V19.7036ZM138.706 15.0947C138.053 15.0947 137.558 15.6125 137.558 16.3085C137.558 17.0065 138.053 17.5224 138.706 17.5224C139.358 17.5224 139.851 17.0046 139.851 16.3085C139.851 15.6125 139.358 15.0947 138.706 15.0947ZM139.582 19.7036H137.85V31.5503H139.582V19.7036ZM155.412 14.8708H153.657V22.266C152.781 20.5799 151.139 19.6145 149.026 19.6145C145.676 19.6145 143.337 22.065 143.337 25.6156C143.337 29.1453 145.676 31.6394 149.048 31.6394C151.161 31.6394 152.781 30.6721 153.657 29.0106V31.5503H155.412V14.8708ZM149.384 30.0652C146.865 30.0652 145.09 28.2216 145.09 25.6592C145.09 23.074 146.867 21.2077 149.384 21.2077C151.88 21.2077 153.657 23.074 153.657 25.6592C153.657 28.2216 151.88 30.0652 149.384 30.0652Z" fill="white" stroke="white" stroke-width="0.5"/>
+                                </svg>
+                                
+                           
+                        </b>
+
+                    </a>
+
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background-color: #2E3E50;">
+
+
+
+                    <ul class="navbar-nav ml-auto">
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark d-flex justify-content-center align-items-center " href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <button type="button" class="btn btn-success d-flex justify-content-center align-items-center" style="background-color: #4CAF50; padding: 5px 20px;
+                                ;"><svg class ="m-1"width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.1041 7.1355H14.3229V5.573C14.3229 3.41675 12.5729 1.66675 10.4166 1.66675C8.26038 1.66675 6.51038 3.41675 6.51038 5.573H8.07288C8.07288 4.27612 9.11975 3.22925 10.4166 3.22925C11.7135 3.22925 12.7604 4.27612 12.7604 5.573V7.1355H5.72913C4.86975 7.1355 4.16663 7.83862 4.16663 8.698V16.5105C4.16663 17.3699 4.86975 18.073 5.72913 18.073H15.1041C15.9635 18.073 16.6666 17.3699 16.6666 16.5105V8.698C16.6666 7.83862 15.9635 7.1355 15.1041 7.1355ZM15.1041 16.5105H5.72913V8.698H15.1041V16.5105ZM10.4166 14.1667C11.276 14.1667 11.9791 13.4636 11.9791 12.6042C11.9791 11.7449 11.276 11.0417 10.4166 11.0417C9.55725 11.0417 8.85413 11.7449 8.85413 12.6042C8.85413 13.4636 9.55725 14.1667 10.4166 14.1667Z" fill="white"/>
+</svg>                          APP EXPIRED</button>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark d-flex justify-content-center align-items-center" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8159 21.6533V18.5213C8.09395 18.2951 4.33337 14.6759 4.33337 10.265C4.33337 5.7062 8.34842 2 13.2871 2C18.2258 2 22.2409 5.7062 22.2409 10.265C22.2409 14.5715 18.9987 18.9041 14.1636 21.053L12.8159 21.6533ZM13.2871 3.74C9.38519 3.74 6.21839 6.6632 6.21839 10.265C6.21839 13.8668 9.38519 16.79 13.2871 16.79H14.7009V18.791C18.1316 16.79 20.3559 13.5014 20.3559 10.265C20.3559 6.6632 17.1891 3.74 13.2871 3.74ZM12.3446 13.745H14.2296V15.485H12.3446V13.745ZM14.2296 12.44H12.3446C12.3446 9.6125 15.1721 9.83 15.1721 8.09C15.1721 7.133 14.3239 6.35 13.2871 6.35C12.2504 6.35 11.4021 7.133 11.4021 8.09H9.51714C9.51714 6.1673 11.2042 4.61 13.2871 4.61C15.3701 4.61 17.0571 6.1673 17.0571 8.09C17.0571 10.265 14.2296 10.4825 14.2296 12.44Z" fill="white"/>
+                                </svg>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Event today</h5>
+                                                        <span class="mail-desc">Just a reminder that event</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Settings</h5>
+                                                        <span class="mail-desc">You can customize this template</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Pavan kumar</h5>
+                                                        <span class="mail-desc">Just see the my admin!</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Luanch Admin</h5>
+                                                        <span class="mail-desc">Just see the my new admin!</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic d-flex justify-content-center align-items-center" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M13 22C14.1917 22 15.1667 21.1 15.1667 20H10.8334C10.8334 21.1 11.8084 22 13 22ZM19.5 15.9091V10.7576C19.5 7.59455 17.7342 4.94667 14.625 4.24606V3.54545C14.625 2.6903 13.8992 2 13 2C12.1009 2 11.375 2.6903 11.375 3.54545V4.24606C8.27671 4.94667 6.50004 7.58424 6.50004 10.7576V15.9091L4.33337 17.9697V19H21.6667V17.9697L19.5 15.9091ZM17.3334 17H8.66671V10.7143C8.66671 8.11619 10.3025 6 13 6C15.6975 6 17.3334 8.11619 17.3334 10.7143V17Z" fill="white"/>
+                                </svg>
+                                </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic d-flex justify-content-center align-items-center" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z" fill="url(#pattern0)"/>
+                                <defs>
+                                <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0" transform="scale(0.0125)"/>
+                                </pattern>
+                                <image id="image0" width="80" height="80" xlink:href="data:image/png;base64,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"/>
+                                </defs>
+                                </svg>
+                                <span class="N">Jon Joshep</span> </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic d-flex justify-content-center align-items-center" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z" fill="#546E7A"/>
+                                    </svg>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+     
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:Voids(0)" aria-expanded="false"><img src="assets/images/M.png"><span class="hide-menu ml-3">Enterprise Section</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level ">
+                                <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu"> Dashboard </span></a></li>
+                                <li class="sidebar-item"><a href="adminLevelUsers.html" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> User Managerment </span></a></li>
+                                <li class="sidebar-item"><a href="userAdminPermission.html" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">User Permission </span></a></li>
+                                <li class="sidebar-item"><a href="AddRestuarant.html" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu">+Add Resturant </span></a></li>
+                                <li class="sidebar-item"><a href="regionAdmin.html" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Regions </span></a></li>
+                                <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Menus </span></a></li>
+                                <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Compare </span></a></li>
+                                <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Settings </span></a></li>
+                                <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Billings </span></a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <div class=" breadAll px-0">
+            <div class="row m-b-30">
+                <div class="col-sm-6 col-lg-6 px-0 ">
+                    <div class="text-left">
+                        <small>Home</small> <small>></small><small>Promotion Management </small><small>></small> <small>Fixed Discount
+                        </small>
+                    </div>
+                    <span class="h4 text-dark">Fixed Discount
+                    </span>
+                </div>
+                <div class="col-sm-6 col-lg-6 px-0 d-flex justify-content-end">
+                    <div class="row">
+                        <div class="col-sm-12 w-100 itemCenter">
+                            <button
+                              type="button"
+                              data-toggle="modal"
+                              data-target="#myModal2"
+                              class="
+                                btn
+                                priButtons
+                                d-flex
+                                justify-content-end
+                                align-items-center
+                              "
+                            >
+                              + ADD FIXED DISCOUNT
+                            </button>
+                          </div>
+                          <div
+                            class="modal right fade"
+                            id="myModal2"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myModalLabel2"
+                          >
+                            <div class="modal-dialog rightSlide" role="document">
+                              <div class="modal-content" style="background-color: #ffffff">
+                                <div class="modal-header">
+                                  <button
+                                    type="button"
+                                    class="close m-0"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span class="itemCenter"style="font-size: 13px" aria-hidden="true"
+                                      ><span class="text-muted h3 px-2 py-1 itemCenter m-0" >&times</span> CLOSE</span
+                                    >
+                                  </button>
+                                  <!--  <h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4> -->
+                                </div>
+            
+                                <div class="modal-body">
+                                  <div class="container">
+                                    <div class="row">
+                                      <span class="h4">Fixed Discount</span>
+                                    </div>
+                                    <div class="row my-3 w-100">
+                                      <div class="row w-100">
+                                        <div class="col-md-12 mx-1">
+                                          <select id="selectFixedDis" class="w-100 borde-0"name="Restaurants" >
+                                            <option class="titlePromo" value="">Select Department <span style="color:red;">*</span></option>
+                                            <option value="The Fat Duck">The Fat Duck</option>
+                                            <option value="Restaurant Moor Hall">Restaurant Moor Hall</option>
+                                            <option value="L'Enclume">L'Enclume</option>
+                                            <option value="Casamia">Casamia</option>
+                                        </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="container my-2">
+                                      <div class="row my-3 py-2">
+                                          <div class="col-md-12">
+                                              <span class="titlePromo">Discount Setting<span>*</span></span>
+                                          </div>
+
+                                      </div>
+                                      <div class="row w-100 my-3 py-2">
+                                        <div class="row w-50 ">
+                                            <div class="col-md-2 itemCenter mr-1">
+                                                <input type="radio">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-wrapper w-100">
+                                                    <input class="fixedDiscountIinput w-100"type="text" id="user" class="w-100" required>
+                                                    <label class="fixedDiscountILabel" for="user">Percentage %</label>
+                                                  </div>
+                                          </div>
+                                        </div>
+                                          <div class="row w-50 ">
+                                            <div class="col-md-2 itemCenter mr-1">
+                                                <input type="radio">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-wrapper w-100">
+                                                    <input class="fixedDiscountIinput w-100"type="text" id="user" class="w-100" required>
+                                                    <label class="fixedDiscountILabel" for="user">Price</label>
+                                                  </div>
+                                          </div>
+                                        </div>
+                                              
+                                        </div>
+                                        <div class="row my-3 py-2">
+                                            <div class="textOnInput w-100">
+                                                <label
+                                                  class="label labelCus addRes"
+                                                  for="inputText"
+                                                  style="background-color: #ffffff !important"
+                                                  >Minimum Bill Amount<span>*</span></label
+                                                >
+                                                <input
+                                                  class="
+                                                    form-control
+                                                    formControlSettings
+                                                    borders
+                                                    addRes
+                                                  "
+                                                  style="background-color: #ffffff !important"
+                                                  type="text"
+                                                  value="£"
+                                                />
+                                              </div>
+                                          
+                                        </div>
+                                          
+                                    </div>
+                                  <div class="container">
+                                    <div class="row my-3 py-2">
+                                        <div class="col-md-12">
+                                            <span class="titlePromo">Offer Applicable For<span>*</span></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5 mx-1 my-2"><input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
+                                            <label for="styled-checkbox-1">Eat in</label></div>
+                                        <div class="col-sm-5 mx-1 my-2"><input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
+                                                <label for="styled-checkbox-1">Delivery</label></div>
+                                        <div class="col-sm-5 mx-1 my-2"><input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
+                                                    <label for="styled-checkbox-1">Take Away</label></div>
+                                        <div class="col-sm-5 mx-1 my-2"><input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
+                                                        <label for="styled-checkbox-1">Drive Thru</label></div>
+                                        <div class="col-sm-5 mx-1 my-2"><input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" >
+                                                            <label for="styled-checkbox-1">Eat in</label></div>
+                                    </div>   
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <div class="row w-100">
+                                    <div class="col-md-12 d-flex justify-content-end" >
+                                      <button type="button" class="btn  px-5 py-1 mainbtn saveBtn w-100" >
+                                           + SAVE</button>
+                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       
+                       
+                    </div>
+
+                </div>
+            </div>
+          </div>
+       
+        <div class="page-wrapper addResI">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid px-0 pb-3 m-0" style="border-radius: 4px;">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12 px-0 mx-0">
+                        <div class="cardCustom px-0 mx-0" style="box-shadow: 0px 1px 3px rgba(63, 63, 68, 0.15), 0px -1px 0px #E0E2E4, -1px 0px 0px #E0E2E4, 0px 1px 0px #E0E2E4, 1px 0px 0px #E0E2E4">
+                            <div class="card-body border-bottom">
+                                <h5 class="card-title m-b-0">Admin Level Users</h5>
+                            </div>
+                            <table id="zero_config" class="table px-0 mx-0 hover" >
+                                  <thead style="background-color: #FAFAFA;">
+                                    <tr>
+                                      <th class=" border-0 tTitle" scope="col">Designation</th>
+                                      <th class=" border-0 tTitle" scope="col">Discount Type</th>
+                                      <th class=" border-0 tTitle " scope="col">Time Used</th>
+                                      <th class=" border-0 mr-2 pr-4" scope="col" style="width: 150px;"></th>
+                                      <th class=" border-0 tTitle" scope="col">Actions</th>
+                                     
+                                    </tr>
+                                  </thead>
+                                  <tbody class="p-b-2 border-bottom m-b-1">
+                                    <tr>
+                                        <th  scope="row">Chef - 10%</th>
+                                        <td class="tContent">Discount on Total Bill</td>
+                                        <td class="tContent">6</td>
+                                        
+                                      
+                                      <td class="tContent"></td>
+                                    
+                                    <td class="tContent"><div class="row  ">
+                                        <div class="col-lg-3 pb-1 mr-3">
+                                            <button class="btn edit py-1 "><small>EDIT</small> </button>
+                                        </div>
+                                        <div class="col-lg-3 pb-1"><button class="btn delete py-1"><small>DELETE</small></button></div>
+                                    </div></td>
+                                      </tr>
+                                      <tr>
+                                        <th  scope="row">Chef - 10%</th>
+                                        <td class="tContent">Discount on Total Bill</td>
+                                        <td class="tContent">6</td>
+                                        
+                                      
+                                      <td class="tContent"></td>
+                                    
+                                    <td class="tContent"><div class="row  ">
+                                        <div class="col-lg-3 pb-1 mr-3">
+                                            <button class="btn edit py-1 "><small>EDIT</small> </button>
+                                        </div>
+                                        <div class="col-lg-3 pb-1"><button class="btn delete py-1"><small>DELETE</small></button></div>
+                                    </div></td>
+                                      </tr>
+                                      <tr>
+                                        <th  scope="row">Restaurant Manager - 10%
+                                        </th>
+                                        <td class="tContent">Discount on Total Bill</td>
+                                        <td class="tContent">22</td>
+                                        
+                                      
+                                      <td class="tContent"></td>
+                                    
+                                    <td class="tContent"><div class="row  ">
+                                        <div class="col-lg-3 pb-1 mr-3">
+                                            <button class="btn edit py-1 "><small>EDIT</small> </button>
+                                        </div>
+                                        <div class="col-lg-3 pb-1"><button class="btn delete py-1"><small>DELETE</small></button></div>
+                                    </div></td>
+                                      </tr>
+                                      <tr>
+                                        <th  scope="row">Area Manager - 100%
+                                        </th>
+                                        <td class="tContent">Discount on Total Bill</td>
+                                        <td class="tContent">1</td>
+                                        
+                                      
+                                      <td class="tContent"></td>
+                                    
+                                    <td class="tContent"><div class="row  ">
+                                        <div class="col-lg-3 pb-1 mr-3">
+                                            <button class="btn edit py-1 "><small>EDIT</small> </button>
+                                        </div>
+                                        <div class="col-lg-3 pb-1"><button class="btn delete py-1"><small>DELETE</small></button></div>
+                                    </div></td>
+                                      </tr>
+                                      
+                                  </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+           
+        </div>
+    
+    </div>
+
+    <!-- <div class="row w-100 mt-auto py-3 save"> 
+        <div class="col-md-12 d-flex justify-content-end" >
+         <button type="button" class="btn  px-3 mx-2 d-flex justify-content-center align-items-center" style="background-color: #ffffff
+         ;"><svg class="mx-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 4.8075L13.1925 3.75L9 7.9425L4.8075 3.75L3.75 4.8075L7.9425 9L3.75 13.1925L4.8075 14.25L9 10.0575L13.1925 14.25L14.25 13.1925L10.0575 9L14.25 4.8075Z" fill="#546E7A"/>
+  </svg>
+  CANCEL</button>
+         <button type="button" class="btn  px-5 py-1 mx-4  mainbtn" ><svg class="mx-1"width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.54022 12.1924L3.33982 9.16051L2.25 10.1857L6.54022 14.25L15.75 5.52517L14.6679 4.5L6.54022 12.1924Z" fill="white"/>
+  </svg>
+  SAVE</button>
+        </div>
+  
+      </div> -->
+   
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+    <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+
+    
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+
+$('#zero_config').dataTable( {
+  "language": {
+    "info": "Row per page: _TOTAL_",
+    "paginate": {
+      "next": ">",
+      "previous":"<",
+    }
+  }
+} );
+    </script>
+
+<Script>
+    /*Dropdown FOR SELECTION*/
+    /* $('.dropdownI').click(function () {
+            $(this).attr('tabindex', 1).focus();
+            $(this).toggleClass('active');
+            $(this).find('.dropdown-menu').slideDown(300);
+          $("#addResBtn").click(function(){
+         var str = $("#fieldRes").val();
+         alert(str);
+         
+  if (str) {
+    const taskLists = document.getElementById("resDropCon");
+    const list = document.createElement("li");
+    list.setAttribute("id",str);
+    list.setAttribute('class','itI')
+    
+    const task = document.createTextNode(str);
+    list.appendChild(task);
+    taskLists.appendChild(list);
+    console.log(list);
+    
+    $("#fieldRes").value = "";
+  } else {
+    alert("please enter a task");
+  }
+         $(this).find('.dropdown-menu').slideup(300);
+         
+    });
+});
+ */
+
+      /*   $('.dropdownI').focusout(function () {
+            $(this).removeClass('active');
+ $(this).find('.dropdown-menu').slideUp(300); 
+        });
+        $('.it').click(function () {
+            $(this).parents('.dropdownI').find('span').text($(this).text());
+            $(this).parents('.dropdownI').find('.mIn').attr('value', $(this).attr('id'));
+        });
+ */
+        </script>
+
+<script>
+  let cont = document.querySelector('.dropdownContent');
+  let k = document.getElementsByClassName('k');
+  let n = document.querySelector('.inL');
+  let add = document.querySelector('.add');
+  let btn = document.querySelector('.btn')
+  let ul = document.querySelector('.listData');
+  function select(){
+      cont.classList.add('dip');
+      for(let i=0;i<k.length;i++){
+      k[i].addEventListener('click',()=>{
+           click( k[i]);
+      })            
+  }}
+
+  function Add(){
+          let li = document.createElement('li');
+          li.setAttribute('class','k');
+          if(add.value==''){
+              alert("Please enter a role ")
+          }
+          else{
+              let text = document.createTextNode(add.value);
+              li.appendChild(text);
+          ul.appendChild(li);
+          for(let i=0;i<k.length;i++){
+      k[i].addEventListener('click',()=>{
+           click( k[i]);
+           
+      })
+       } 
+       add.value="";
+          }
+          
+      }
+  
+  function click(c){
+          n.setAttribute('value',c.innerHTML);
+          cont.classList.remove('dip');
+      }       
+
+      
+</script>
+
+
+<script>
+    let chF = document.getElementsByClassName('chF');
+    let chFL = document.getElementsByClassName('chFL');
+    
+    
+    function checkForFirst(){
+        for(let i =0; i<chF.length;i++){
+            chF[i].checked=true;
+            chF[i].classList.toggle('displayBlock')
+        }
+    }
+
+</script>
+
+<!-- <script>
+
+    ///////////////////////////////////////////////////
+    //===============================================>
+    ///FIELD VALIDATIONS
+    (function(){
+    document.getElementById("save").onclick = function() {
+    let allAreFilled = true;
+    document.getElementById("addResForm").querySelectorAll("[required]").forEach(function(i) {
+      if (!allAreFilled) return;
+      if (!i.value) allAreFilled = false;
+    })
+    if (!allAreFilled) {
+      alert('one or more fields are empty!');
+    }
+  };
+    })();
+  </script> -->
+
+</body>
+
+</html>
